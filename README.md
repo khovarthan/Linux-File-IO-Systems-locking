@@ -20,8 +20,6 @@ Execute the C Program for the desired output.
 # PROGRAM:
 
 ## 1.To Write a C program that illustrates files copying 
-
-
 ```
 #include <unistd.h>
 #include <sys/stat.h>
@@ -39,12 +37,14 @@ int main(int argc, char *argv[]) {
     int in, out;
     ssize_t nread;
 
+    // Open source file
     in = open(argv[1], O_RDONLY);
     if (in == -1) {
         perror("Error opening source file");
         exit(EXIT_FAILURE);
     }
 
+    // Open destination file
     out = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
     if (out == -1) {
         perror("Error opening destination file");
@@ -52,6 +52,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
+    // Copy contents
     while ((nread = read(in, block, sizeof(block))) > 0) {
         if (write(out, block, nread) != nread) {
             perror("Error writing to destination file");
@@ -70,12 +71,12 @@ int main(int argc, char *argv[]) {
     return EXIT_SUCCESS;
 }
 ```
-## OUTPUT
 
-![Alt text](os_exp7_1.png)
+
+
+
 
 ## 2.To Write a C program that illustrates files locking
-
 ```
 #include <fcntl.h>
 #include <stdio.h>
@@ -141,13 +142,18 @@ int main(int argc, char *argv[]) {
     close(fd);
     return 0;
 }
-
 ```
 
 
-## OUTPUT
 
-<img width="1277" height="632" alt="image" src="https://github.com/user-attachments/assets/d26df85c-c5be-4c3f-89ac-d72b7debd9b0" />
+## OUTPUT
+## File copying:
+
+<img width="575" height="125" alt="image" src="https://github.com/user-attachments/assets/e8aae9c3-c26e-432b-a375-e2dbcc61723b" />
+
+## File locking:
+
+<img width="577" height="467" alt="image" src="https://github.com/user-attachments/assets/3e5ea505-2606-4ad5-9d65-6b8ef0970d9f" />
 
 
 # RESULT:
